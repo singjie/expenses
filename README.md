@@ -9,6 +9,10 @@ Download CSV activity from Citibank Internet Banking portal.
 
 ```
 ./script.rb <file.csv> [<other_file.csv>]
+
+// OR
+
+ls *.csv | ./script.rb 
 ```
 
 ## Sample Output
