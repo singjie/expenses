@@ -30,7 +30,6 @@ require('csv')
     "WEE NAM KEE",
     "RONG HUA BAK KUT TEH",
     "ZAKKA",
-    "STARBUCKS",
     "HK KIM GARY",
     "TCC",
     "YAYOI",
@@ -39,7 +38,6 @@ require('csv')
     "MCDONALD",
     "PIZZA HUT",
     "8 KOREAN BBQ",
-    "THE COFFEE BEAN",
     "SUSHI-TEI",
     "SWENSEN'S",
     "KURIYA",
@@ -56,13 +54,15 @@ require('csv')
     "BUCKTILE",
     "HORKOMO",
   ],
-  "DESERT" => [
+  "DESSERT" => [
     "LADY M",
     "GARRETT POPCORN",
     "BEE CHENG HIANG",
+    "THE COFFEE BEAN",
+    "STARBUCKS",
   ],
   "BABY_MEDICAL" => ["KINDER CLINIC", "HEALTHCARE", "NHG"],
-  "BABY" => ["KIDDY PALACE", "MOTHERCARE", "BABY KINGDOM", "BEAUTY.MUMS & BABIES", "PETIT BATEAU", "TOYS'R'US", "GAPKIDS", "MUMS & BABES", "BB SPA"],
+  "BABY" => ["KIDDY PALACE", "MOTHERCARE", "BABY KINGDOM", "BEAUTY.MUMS & BABIES", "PETIT BATEAU", "TOYS'R'US", "GAPKIDS", "MUMS & BABES", "BB SPA", "BLOOMB"],
   "BOOKS" => ["AMAZON SERVICES-KINDLE", "Kindle Unlimited"],
   "ECOMMERCE" => ["Shopee"],
   "MOVIES" => ["SHAW"],
@@ -134,7 +134,7 @@ def analyze_and_print months
         categories[category] = [] if categories[category].nil?
 
         phrases.each do |phrase|
-          if name.start_with?(phrase)
+          if name.downcase.start_with?(phrase.downcase)
 
             categories[category] << entry
             found = true
@@ -177,6 +177,12 @@ def analyze_and_print months
 end
 
 entries = []
+
+unless ARGV.count > 0
+  ARGF.each_with_index do |line, idx|
+    entries += (format(File.join(Dir.pwd, line.strip)))
+  end
+end
 
 ARGV.each do |arg|
   entries += (format(arg))
